@@ -1,13 +1,41 @@
 
-import React, { useState } from 'react';
+import{ useEffect, useState } from 'react';
+
+// Key name for localStorage
+const STORAGE_KEY = "my_todo_list";
 
 const Uitodo = () => {
+
+    // State for todo list
     const [todos, setTodos] = useState([
         { id: 1, title: 'Learn React', completed: false },
         { id: 2, title: 'Build a Todo App', completed: false },
         { id: 3, title: 'Master JavaScript', completed: false },
     ]);
     const [newTodoText, setNewTodoText] = useState('');
+
+    // Load todos from localStorage on first render
+    useEffect(() => {
+       try {
+           const storedTodos = JSON.parse(localStorage.getItem(STORAGE_KEY));
+           //or const storedTodos = localStorage.getItem(STORAGE_KEY);
+           if (storedTodos) {
+               setTodos(storedTodos);
+               //setTodos(JSON.parse(storedTodos));
+           }
+       } catch (error) {
+           console.error("Failed to load todos from localStorage:", error);
+       }
+    }, []);
+
+    // Save todos to localStorage whenever they change
+    useEffect(() => {
+        try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+        } catch (error) {
+            console.error("Failed to save todos to localStorage:", error);
+        }
+    }, [todos]);
 
     const addTodo = () => {
         if (!newTodoText.trim()) return;
