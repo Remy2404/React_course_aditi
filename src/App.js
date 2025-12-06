@@ -1,23 +1,19 @@
-import logo from './logo.svg';
+import Wellcome from './components/wellcome';
+import { Hello } from './components/hello';
 import './App.css';
+import { Course } from './components/Course';
+import Counter from './components/Counter';
+import CounterApp from './components/CounterApp';
+import Uitodo from './components/todolist/uitodo';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Wellcome />
+      <Hello />
+      <Course />
+      <CounterApp />
+      <Uitodo />
     </div>
   );
 }
